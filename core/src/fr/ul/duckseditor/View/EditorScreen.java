@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class EditorScreen extends ScreenAdapter {
@@ -20,7 +21,7 @@ public class EditorScreen extends ScreenAdapter {
         monde.create();
         sb=new SpriteBatch();
         camera = new OrthographicCamera ();
-        vp = new FitViewport(64, 36, camera);
+        vp = new FitViewport(monde.getLargeur(),monde.getHauteur(), camera);
         vp.apply();
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
         camera.update();
@@ -39,6 +40,16 @@ public class EditorScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        int x;
+        int y;
+        if(Gdx.input.isTouched()){
+            Vector3 touchPos = new Vector3();
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+            x = (int) touchPos.x;
+            y = (int) touchPos.y;
+            System.out.println("("+x+" "+y+")");
+        }
         sb.begin();
         monde.draw(sb);
         sb.end();

@@ -17,7 +17,8 @@ public class Bord {
 
     public Bord(){
         bords = new PolygonShape();
-        float[] pts ={0,6,0,36,64,36,64,6};
+        //float[] pts ={0,6,0,36,64,36,64,6};
+        float[] pts ={0,0,0,36,64,36,64,0};
         bords.set(pts);
         textureFactory = new TextureFactory();
     }
