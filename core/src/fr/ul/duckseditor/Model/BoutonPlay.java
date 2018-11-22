@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import fr.ul.duckseditor.DataFactory.TextureFactory;
 
-public class BoutonPlay {
+public class BoutonPlay{
     private Body objet;
     private CircleShape shape;
     private Texture panneau;
@@ -33,6 +33,7 @@ public class BoutonPlay {
         objet.createFixture(fixtureDef);
         shape.dispose();
     }
+
 
     public void draw(SpriteBatch sb){
         panneau = textureFactory.getPlay();

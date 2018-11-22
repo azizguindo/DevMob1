@@ -77,4 +77,16 @@ public class BoutonsFichier {
         sb.draw(boutonRewrite,v2.x,v2.y,4,4);
         sb.draw(boutonSave,v3.x,v3.y,4,4);
     }
+
+    public Body getObjet1() {
+        return objet1;
+    }
+
+    public Body getObjet2() {
+        return objet2;
+    }
+
+    public Body getObjet3() {
+        return objet3;
+    }
 }

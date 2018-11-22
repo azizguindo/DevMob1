@@ -17,7 +17,7 @@ public class Panneau {
 
     public Panneau(){
         shape = new PolygonShape();
-        float[] pts ={0,6,0,36,15,36,15,6};
+        float[] pts ={0,0,0,36,15,36,15,0};
         shape.set(pts);
         textureFactory = new TextureFactory();
     }

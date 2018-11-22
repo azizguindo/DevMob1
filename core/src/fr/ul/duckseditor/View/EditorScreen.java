@@ -6,18 +6,23 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import fr.ul.duckseditor.Model.Monde;
+import fr.ul.duckseditor.listener.Listener;
 
 public class EditorScreen extends ScreenAdapter {
-    private fr.ul.duckseditor.Model.Monde monde;
+    private Monde monde;
     private SpriteBatch sb;
     private OrthographicCamera camera;
     private FitViewport vp;
+    private Listener listener;
+    private Box2DDebugRenderer debugRenderer;
 
 
     public EditorScreen(){
-
-        monde = new fr.ul.duckseditor.Model.Monde();
+        debugRenderer=new Box2DDebugRenderer();
+        monde = new Monde();
         monde.create();
         sb=new SpriteBatch();
         camera = new OrthographicCamera ();
@@ -26,6 +31,8 @@ public class EditorScreen extends ScreenAdapter {
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
         camera.update();
         sb.setProjectionMatrix(camera.combined);
+        listener = new Listener(monde,camera);
+        Gdx.input.setInputProcessor(listener);
     }
 
     @Override
@@ -40,16 +47,6 @@ public class EditorScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        int x;
-        int y;
-        if(Gdx.input.isTouched()){
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            x = (int) touchPos.x;
-            y = (int) touchPos.y;
-            System.out.println("("+x+" "+y+")");
-        }
         sb.begin();
         monde.draw(sb);
         sb.end();
